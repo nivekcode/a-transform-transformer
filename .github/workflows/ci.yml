@@ -16,5 +16,5 @@ jobs:
         uses: actions/setup-node@v3
       - name: Install node modules
         run: npm install
-      - name: Test
+      - name: Lint
         run: npm run lint
