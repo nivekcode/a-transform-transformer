@@ -1,7 +1,11 @@
 #A-transformer-transformer
+
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
+
 The `a-transformer-transformer` is a tool that allows you to migrate your Angular `@Input()`which are of type
 `boolean` to use the new `transform` property with the `booleanAttribute` transformer.
 
@@ -9,8 +13,18 @@ If you have `@Input` with existing decorator arguments for example (`@Input({req
 with the `transform: booleanAttribute`.
 
 ## Installation
+
 ```bash
  npx a-transformer-transformer
+```
+
+## Usage
+
+The transformer currently offers the option to transform your `@Input()` of type `boolean`.
+To do so you have to run the following command.
+
+```bash
+npx a-transformer-transformer -b
 ```
 
 ## Contributors ✨
