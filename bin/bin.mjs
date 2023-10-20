@@ -6,7 +6,7 @@ import { transform } from '../src/index.mjs';
 
 try {
   console.log(
-    chalk.magenta(`
+    chalk.blue(`
 =========================
  A-Transform-Transformer
 =========================
@@ -24,7 +24,11 @@ try {
 
   args
     .option('b', 'Add transform booleanAttribute to all inputs of type boolean')
-    .option('n', 'Add transform numbersAttribute to all inputs of type number');
+    .option('n', 'Add transform numbersAttribute to all inputs of type number')
+    .option(
+      'a',
+      'Enrich all inputs with transform booleanAttribute and numberAttribute'
+    );
 
   const flags = args.parse(process.argv);
 
@@ -38,7 +42,13 @@ try {
     process.exit(1);
   }
 
-  const { b: booleanAttributes, n: numberAttributes } = flags;
+  let { b: booleanAttributes, n: numberAttributes, a: all } = flags;
+
+  if (all) {
+    booleanAttributes = true;
+    numberAttributes = true;
+  }
+
   const infoMessage = `${booleanAttributes ? ' booleanAttributes' : ''}${
     numberAttributes ? ' numberAttributes' : ''
   }`;

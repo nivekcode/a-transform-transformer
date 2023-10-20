@@ -56,6 +56,14 @@ The transformer currently offers the option to add `{transform: numberAttribute}
 npx a-transformer-transformer -n
 ```
 
+### Transform all
+
+To apply all available transformations you can run the following command.
+
+```bash
+npx a-transformer-transformer -a
+```
+
 ### Help
 
 To get a list of all the available options you can always run the following command.

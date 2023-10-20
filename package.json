@@ -15,7 +15,7 @@
     "format:test": "prettier --check src/**/*.mjs",
     "format:write": "prettier --write src/**/*.mjs",
     "lint": "eslint src/**/*.mjs bin/**/*.mjs",
-    "test-copy": "mv dist/a-transform-transformer-0.0.0.tgz ../transform-test"
+    "test-copy": "mv dist/a-transform-transformer-1.0.0.tgz ../transform-test"
   },
   "repository": {
     "type": "git",
