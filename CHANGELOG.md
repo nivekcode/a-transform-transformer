@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/kreuzerk/a-transform-transformer/compare/v1.2.0...v1.2.1) (2023-10-20)
+
+
+### Bug Fixes
+
+* 🐛 overwrite build in version command with custom command ([1712a68](https://github.com/kreuzerk/a-transform-transformer/commit/1712a68d516ccb3245e5a289ce146a68f332d218))
+
 # [1.2.0](https://github.com/kreuzerk/a-transform-transformer/compare/v1.1.0...v1.2.0) (2023-10-20)
 
 
