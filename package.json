@@ -14,8 +14,7 @@
     "copy:source": "copyfiles src/**/*.mjs dist",
     "format:test": "prettier --check src/**/*.mjs",
     "format:write": "prettier --write src/**/*.mjs",
-    "lint": "eslint src/**/*.mjs bin/**/*.mjs",
-    "test-copy": "mv dist/a-transform-transformer-1.0.0.tgz ../transform-test"
+    "lint": "eslint src/**/*.mjs bin/**/*.mjs"
   },
   "repository": {
     "type": "git",

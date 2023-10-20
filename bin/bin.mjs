@@ -3,6 +3,7 @@ import ora from 'ora';
 import args from 'args';
 import chalk from 'chalk';
 import { transform } from '../src/index.mjs';
+import { readFileSync } from 'fs';
 
 try {
   console.log(
@@ -28,7 +29,14 @@ try {
     .option(
       'a',
       'Enrich all inputs with transform booleanAttribute and numberAttribute'
-    );
+    )
+    .command('version', 'Print version', () => {
+      const json = JSON.parse(
+        readFileSync(new URL('../package.json', import.meta.url))
+      );
+      console.log(chalk.bgWhite.underline.bold(`Version: ${json.version}`));
+      process.exit(0);
+    });
 
   const flags = args.parse(process.argv);
 
@@ -39,7 +47,7 @@ try {
         'ATT: Please provide a flag. To see the available flags run: a-transform-transformer --help'
       )
     );
-    process.exit(1);
+    process.exit(0);
   }
 
   let { b: booleanAttributes, n: numberAttributes, a: all } = flags;
