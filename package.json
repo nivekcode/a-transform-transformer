@@ -1,0 +1,34 @@
+{
+  "name": "a-transform-transformer",
+  "version": "1.0.0",
+  "description": "Schematics to automatically add booleanAttribute to Angulars Input decorator",
+  "main": "index.js",
+  "scripts": {
+    "format:test": "prettier --check \"src/**/*.mjs\"",
+    "format:write": "prettier --write \"src/**/*.mjs\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kreuzerk/a-transform-transformer.git"
+  },
+  "keywords": [
+    "Angular",
+    "Schematics",
+    "JavaScript",
+    "NPM",
+    "Frontend"
+  ],
+  "author": "Kevin Kreuzer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kreuzerk/a-transform-transformer/issues"
+  },
+  "homepage": "https://github.com/kreuzerk/a-transform-transformer#readme",
+  "dependencies": {
+    "ng-morph": "^4.0.0"
+  },
+  "devDependencies": {
+    "prettier": "^3.0.3"
+  }
+}
