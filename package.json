@@ -1,13 +1,14 @@
 {
   "name": "a-transform-transformer",
   "version": "1.0.0",
-  "description": "Schematics to automatically add booleanAttribute to Angulars Input decorator",
+  "description": "Schematics to automatically add booleanAttribute to Angular's Input decorator",
   "main": "index.js",
   "bin": {
     "a-transform-transformer": "bin/bin.mjs"
   },
   "scripts": {
     "build": "npm-run-all copy:*",
+    "bump-version": "rjp package.json version $VERSION",
     "copy:assets": "copyfiles package.json README.md dist",
     "copy:bin": "copyfiles \"bin/**/*.mjs\" dist",
     "copy:source": "copyfiles \"src/**/*.mjs\" dist",
@@ -36,16 +37,22 @@
   "homepage": "https://github.com/kreuzerk/a-transform-transformer#readme",
   "dependencies": {
     "args": "^5.0.3",
+    "chalk": "^5.3.0",
     "ng-morph": "^4.0.0",
     "ora": "^7.0.1"
   },
   "devDependencies": {
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/exec": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
     "copyfiles": "^2.4.1",
     "eslint": "^8.51.0",
     "eslint-config-google": "^0.14.0",
     "husky": "^8.0.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.8.8",
-    "pretty-quick": "^3.1.3"
+    "pretty-quick": "^3.1.3",
+    "replace-json-property": "^1.9.0",
+    "semantic-release": "^22.0.5"
   }
 }
