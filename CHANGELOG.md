@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/kreuzerk/a-transform-transformer/compare/v1.0.0...v1.1.0) (2023-10-20)
+
+
+### Features
+
+* 🎸 numberAttribute transformation ([078343a](https://github.com/kreuzerk/a-transform-transformer/commit/078343a66867ad2a02c5242773e18c08d177a6d9))
+
 # 1.0.0 (2023-10-20)
 
 
