@@ -10,10 +10,13 @@ import {
   setActiveProject,
 } from 'ng-morph';
 
-export function transform(booleanAttributes) {
-  setActiveProject(createProject(new NgMorphTree(), '/', ['**/*.ts']));
+const BOOLEAN_TRANSFORMER = 'booleanAttribute';
+const NUMBER_TRANSFORMER = 'numberAttribute';
+const BOOLEAN_DECORATOR_ARGUMENT = `transform: ${BOOLEAN_TRANSFORMER}`;
+const NUMBER_DECORATOR_ARGUMENT = `transform: ${NUMBER_TRANSFORMER}`;
 
-  const DECORATOR_ARGUMENT = 'transform: booleanAttribute';
+export function transform(booleanAttributes, numberAttributes) {
+  setActiveProject(createProject(new NgMorphTree(), '/', ['**/*.ts']));
 
   const classes = getClasses('**/*.ts');
 
@@ -24,45 +27,70 @@ export function transform(booleanAttributes) {
       const decorator = getDecorators(p)[0];
       const decoratorName = decorator?.getName();
 
+      const sourceFilePath = p.getSourceFile().getFilePath();
+
       if (
+        booleanAttributes &&
         propType.getText() === 'boolean' &&
         decoratorName === 'Input' &&
         !includesTransform(decorator)
       ) {
-        const enrichedDecorators = enrichDecorator(decorator);
-        if (decorator.getArguments().length !== 0) {
-          decorator.removeArgument(0);
-        }
-        decorator.addArgument(enrichedDecorators);
+        const enrichedDecorators = enrichDecorator(
+          decorator,
+          BOOLEAN_DECORATOR_ARGUMENT
+        );
+        updateDecorators(decorator, enrichedDecorators);
+        updateImports(sourceFilePath, BOOLEAN_TRANSFORMER);
+      }
 
-        const angularCoreImports = getImports(p.getSourceFile().getFilePath(), {
-          moduleSpecifier: '@angular/core',
-        })[0];
-
-        const match = angularCoreImports.getText().match('\\{([^}]+)\\}')[1];
-        const namedImports = match.split(',').map((s) => s.trim());
-
-        if (!namedImports.includes('booleanAttribute')) {
-          editImports(angularCoreImports, () => ({
-            namedImports: [...namedImports, 'booleanAttribute'],
-          }));
-        }
+      if (
+        numberAttributes &&
+        propType.getText() === 'number' &&
+        decoratorName === 'Input' &&
+        !includesTransform(decorator)
+      ) {
+        const enrichedDecorators = enrichDecorator(
+          decorator,
+          NUMBER_DECORATOR_ARGUMENT
+        );
+        updateDecorators(decorator, enrichedDecorators);
+        updateImports(sourceFilePath, NUMBER_TRANSFORMER);
       }
     });
   });
+
+  function updateDecorators(decorator, enrichedDecorators) {
+    if (decorator.getArguments().length !== 0) {
+      decorator.removeArgument(0);
+    }
+    decorator.addArgument(enrichedDecorators);
+  }
+
+  function updateImports(sourceFile, namedImportToAdd) {
+    const angularCoreImports = getImports(sourceFile, {
+      moduleSpecifier: '@angular/core',
+    })[0];
+
+    const match = angularCoreImports.getText().match('\\{([^}]+)\\}')[1];
+    const namedImports = match.split(',').map((s) => s.trim());
+
+    if (!namedImports.includes(namedImportToAdd)) {
+      editImports(angularCoreImports, () => ({
+        namedImports: [...namedImports, namedImportToAdd],
+      }));
+    }
+  }
 
   function includesTransform(decorator) {
     return decorator?.getArguments()[0]?.getText()?.includes('transform:');
   }
 
-  function enrichDecorator(decorator) {
+  function enrichDecorator(decorator, enrichment) {
     const decoratorArguments = decorator.getArguments();
     if (decoratorArguments.length === 0) {
-      return `{${DECORATOR_ARGUMENT}}`;
+      return `{${enrichment}}`;
     }
-    return decoratorArguments[0]
-      ?.getText()
-      ?.replace('}', `, ${DECORATOR_ARGUMENT}}`);
+    return decoratorArguments[0]?.getText()?.replace('}', `, ${enrichment}}`);
   }
 
   saveActiveProject();

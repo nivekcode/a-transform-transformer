@@ -1,4 +1,4 @@
-#A-transformer-transformer
+# A-transformer-transformer
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 
@@ -7,12 +7,30 @@
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 The `a-transformer-transformer` is a tool that allows you to migrate your Angular `@Input()`which are of type
-`boolean` to use the new `transform` property with the `booleanAttribute` transformer.
+`boolean` or `number` to use the new `transform` property with the `booleanAttribute` or the `numberAttribute`
+transformer.
 
 If you have `@Input` with existing decorator arguments for example (`@Input({required: true})`) the tool will merge them
 with the `transform: booleanAttribute`.
 
 ## Installation
+
+The package can either be installed locally inside your project as a dev dependency or globally. Since its a one time
+migration tool we think its best used with `npx` though.
+
+### Local
+
+```bash
+ npm i -D a-transformer-transformer
+```
+
+### Global
+
+```bash
+ npm i -g a-transformer-transformer
+```
+
+### npx
 
 ```bash
  npx a-transformer-transformer
@@ -20,11 +38,30 @@ with the `transform: booleanAttribute`.
 
 ## Usage
 
-The transformer currently offers the option to transform your `@Input()` of type `boolean`.
-To do so you have to run the following command.
+To use the transformer just execute one of the following commands inside the root of your project.
+
+### Transform boolean
+
+The transformer currently offers the option to add `{transform: booleanAttribute}` to your `@Input()` of type `boolean`. To do so you have to run the following command.
 
 ```bash
 npx a-transformer-transformer -b
+```
+
+### Transform numbers
+
+The transformer currently offers the option to add `{transform: numberAttribute}` to your `@Input()` of type `number`. To do so you have to run the following command.
+
+```bash
+npx a-transformer-transformer -n
+```
+
+### Help
+
+To get a list of all the available options you can always run the following command.
+
+```bash
+npx a-transformer-transformer -h
 ```
 
 ## Contributors ✨
@@ -56,4 +93,5 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
-This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification.
+Contributions of any kind welcome!

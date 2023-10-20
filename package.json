@@ -10,13 +10,12 @@
     "build": "npm-run-all copy:*",
     "bump-version": "rjp package.json version $VERSION",
     "copy:assets": "copyfiles package.json README.md dist",
-    "copy:bin": "copyfiles \"bin/**/*.mjs\" dist",
-    "copy:source": "copyfiles \"src/**/*.mjs\" dist",
-    "format:test": "prettier --check \"src/**/*.mjs\"",
-    "format:write": "prettier --write \"src/**/*.mjs\"",
-    "lint": "eslint \"src/**/*.mjs\"",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "test-copy": "mv dist/a-transform-transformer-1.0.0.tgz ../transform-test"
+    "copy:bin": "copyfiles bin/**/*.mjs dist",
+    "copy:source": "copyfiles src/**/*.mjs dist",
+    "format:test": "prettier --check src/**/*.mjs",
+    "format:write": "prettier --write src/**/*.mjs",
+    "lint": "eslint src/**/*.mjs bin/**/*.mjs",
+    "test-copy": "mv dist/a-transform-transformer-0.0.0.tgz ../transform-test"
   },
   "repository": {
     "type": "git",

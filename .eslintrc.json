@@ -10,7 +10,9 @@
     "sourceType": "module"
   },
   "rules": {
+    "comma-dangle": "off",
     "require-jsdoc": "off",
-    "indent": "off"
+    "indent": "off",
+    "max-len": "off"
   }
 }

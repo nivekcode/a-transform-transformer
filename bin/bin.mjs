@@ -22,7 +22,9 @@ try {
     `)
   );
 
-  args.option('b', 'Add transform booleanAttribute to all boolean inputs');
+  args
+    .option('b', 'Add transform booleanAttribute to all inputs of type boolean')
+    .option('n', 'Add transform numbersAttribute to all inputs of type number');
 
   const flags = args.parse(process.argv);
 
@@ -36,13 +38,14 @@ try {
     process.exit(1);
   }
 
-  const { b: booleanAttributes } = flags;
+  const { b: booleanAttributes, n: numberAttributes } = flags;
+  const infoMessage = `${booleanAttributes ? ' booleanAttributes' : ''}${
+    numberAttributes ? ' numberAttributes' : ''
+  }`;
 
-  const spinner = ora(
-    `Transforming ${booleanAttributes && 'booleanAttributes'}`
-  ).start();
-  transform(booleanAttributes);
-  spinner.succeed(`Transformed ${booleanAttributes && 'booleanAttributes'}`);
+  const spinner = ora(`Transforming${infoMessage}`).start();
+  transform(booleanAttributes, numberAttributes);
+  spinner.succeed(`Transformed${infoMessage}`);
 } catch (e) {
   console.log(chalk.red('ATT: Something went wrong!', e));
   process.exit(1);
