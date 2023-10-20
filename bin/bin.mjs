@@ -1,8 +1,8 @@
 #!/usr/bin/env node
-import ora from "ora";
-import args from "args";
-import chalk from "chalk";
-import { fakeIt, transform } from "../src/index.mjs";
+import ora from 'ora';
+import args from 'args';
+import chalk from 'chalk';
+import { transform } from '../src/index.mjs';
 
 try {
   console.log(
@@ -22,15 +22,15 @@ try {
     `)
   );
 
-  args.option("b", "Add transform booleanAttribute to all boolean inputs");
+  args.option('b', 'Add transform booleanAttribute to all boolean inputs');
 
   const flags = args.parse(process.argv);
 
   if (Object.keys(flags).length === 0) {
-    console.log(chalk.red("ATT: No flags provided - there is nothing to do!"));
+    console.log(chalk.red('ATT: No flags provided - there is nothing to do!'));
     console.log(
       chalk.blue(
-        "ATT: Please provide a flag. To see the available flags run: a-transform-transformer --help"
+        'ATT: Please provide a flag. To see the available flags run: a-transform-transformer --help'
       )
     );
     process.exit(1);
@@ -39,11 +39,11 @@ try {
   const { b: booleanAttributes } = flags;
 
   const spinner = ora(
-    `Transforming ${booleanAttributes && "booleanAttributes"}`
+    `Transforming ${booleanAttributes && 'booleanAttributes'}`
   ).start();
   transform(booleanAttributes);
-  spinner.succeed(`Transformed ${booleanAttributes && "booleanAttributes"}`);
+  spinner.succeed(`Transformed ${booleanAttributes && 'booleanAttributes'}`);
 } catch (e) {
-  console.log(chalk.red("ATT: Something went wrong!", e));
+  console.log(chalk.red('ATT: Something went wrong!', e));
   process.exit(1);
 }

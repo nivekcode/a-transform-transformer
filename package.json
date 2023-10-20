@@ -14,7 +14,7 @@
     "format:test": "prettier --check \"src/**/*.mjs\"",
     "format:write": "prettier --write \"src/**/*.mjs\"",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "test-copy": "mv dist/a-transform-transformer-1.0.0.tgz ../sometest"
+    "test-copy": "mv dist/a-transform-transformer-1.0.0.tgz ../transform-test"
   },
   "repository": {
     "type": "git",

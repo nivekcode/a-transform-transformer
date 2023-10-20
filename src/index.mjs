@@ -1,5 +1,3 @@
-// TODO: provide number transformation
-
 import {
   createProject,
   editImports,
@@ -10,14 +8,14 @@ import {
   NgMorphTree,
   saveActiveProject,
   setActiveProject,
-} from "ng-morph";
+} from 'ng-morph';
 
 export function transform(booleanAttributes) {
-  setActiveProject(createProject(new NgMorphTree(), "/", ["**/*.ts"]));
+  setActiveProject(createProject(new NgMorphTree(), '/', ['**/*.ts']));
 
-  const DECORATOR_ARGUMENT = "transform: booleanAttribute";
+  const DECORATOR_ARGUMENT = 'transform: booleanAttribute';
 
-  const classes = getClasses("**/*.ts");
+  const classes = getClasses('**/*.ts');
 
   classes.forEach((c) => {
     const props = getProperties(c);
@@ -27,8 +25,8 @@ export function transform(booleanAttributes) {
       const decoratorName = decorator?.getName();
 
       if (
-        propType.getText() === "boolean" &&
-        decoratorName === "Input" &&
+        propType.getText() === 'boolean' &&
+        decoratorName === 'Input' &&
         !includesTransform(decorator)
       ) {
         const enrichedDecorators = enrichDecorator(decorator);
@@ -38,15 +36,15 @@ export function transform(booleanAttributes) {
         decorator.addArgument(enrichedDecorators);
 
         const angularCoreImports = getImports(p.getSourceFile().getFilePath(), {
-          moduleSpecifier: "@angular/core",
+          moduleSpecifier: '@angular/core',
         })[0];
 
-        const match = angularCoreImports.getText().match("\\{([^}]+)\\}")[1];
-        const namedImports = match.split(",").map((s) => s.trim());
+        const match = angularCoreImports.getText().match('\\{([^}]+)\\}')[1];
+        const namedImports = match.split(',').map((s) => s.trim());
 
-        if (!namedImports.includes("booleanAttribute")) {
+        if (!namedImports.includes('booleanAttribute')) {
           editImports(angularCoreImports, () => ({
-            namedImports: [...namedImports, "booleanAttribute"],
+            namedImports: [...namedImports, 'booleanAttribute'],
           }));
         }
       }
@@ -54,7 +52,7 @@ export function transform(booleanAttributes) {
   });
 
   function includesTransform(decorator) {
-    return decorator?.getArguments()[0]?.getText()?.includes("transform:");
+    return decorator?.getArguments()[0]?.getText()?.includes('transform:');
   }
 
   function enrichDecorator(decorator) {
@@ -64,7 +62,7 @@ export function transform(booleanAttributes) {
     }
     return decoratorArguments[0]
       ?.getText()
-      ?.replace("}", `, ${DECORATOR_ARGUMENT}}`);
+      ?.replace('}', `, ${DECORATOR_ARGUMENT}}`);
   }
 
   saveActiveProject();
