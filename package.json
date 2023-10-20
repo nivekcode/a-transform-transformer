@@ -6,7 +6,8 @@
   "scripts": {
     "format:test": "prettier --check \"src/**/*.mjs\"",
     "format:write": "prettier --write \"src/**/*.mjs\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -29,6 +30,8 @@
     "ng-morph": "^4.0.0"
   },
   "devDependencies": {
-    "prettier": "^3.0.3"
+    "husky": "^8.0.0",
+    "prettier": "^2.8.8",
+    "pretty-quick": "^3.1.3"
   }
 }
